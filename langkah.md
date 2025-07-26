@@ -204,6 +204,17 @@ cat ~/.ssh/id_ed25519
 Lakukan langkah yang sama untuk secrets berikut:
 
 Secret Name	Value
+
 EC2_HOST	Alamat public EC2 kamu, contoh: 3.107.xxx.xxx
+
 EC2_USER	Nama user, biasanya: ec2-user
 
+🌐 2. Tambahkan Secrets Lainnya
+
+Lakukan langkah yang sama untuk secrets berikut:
+
+Secret Name	Value
+
+EC2_HOST	Alamat public EC2 kamu, contoh: 3.107.xxx.xxx
+
+EC2_USER	Nama user, biasanya: ec2-user
