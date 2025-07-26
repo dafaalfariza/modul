@@ -134,14 +134,69 @@ Kalau ditanya lokasi simpan, tekan Enter untuk menyimpan default di:
 
 ~/.ssh/id_ed25519.pub (public)
 
+⚠️ Jangan pernah meng-upload file id_ed25519 (private key)!
+
 🔐 Upload Public Key ke EC2
 
 Lalu, tambahkan public key ke EC2 instance kamu:
 
-Buka terminal lokal kamu.
+Buka terminal lokal kamu powershell
 
-ssh-keygen -t ed25519 -C "ci-cd-deploy"
+ssh-keygen -t ed25519 -C "sumut.dafa@gmail.com"
 
 jika muncul: Enter file in which to save the key (C:\Users\MyBook Hype/.ssh/id_ed25519):
 
 - klik enter
+- passpharse dan enter passpharse again = klik enter
+
+### Pindahkan key ke ec2
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+
+Salin hasilnya. Contoh:
+```bash
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJBrXGZrlZBfdPTAmJ7SZ0hQ6gvmsymgRVSAadDakZoY sumut.dafa@gmail.com
+```
+
+masuk ke terminal ssh ec2
+
+masuk ke folder ec2
+```bash
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+```
+```bash
+nano ~/.ssh/authorized_keys
+```
+Paste isi id_ed25519.pub ke baris baru, lalu tekan CTRL+X, lalu Y, lalu Enter. (yang tadi) pastekan dibawah key ec2 kita
+```bash
+chmod 600 ~/.ssh/authorized_keys
+```
+
+### Logout dari EC2 dan uji koneksi pakai key baru:
+```bash
+ssh -i ~/.ssh/id_ed25519 ec2-user@3.107.100.123
+```
+
+1. Salin Private Key (id_ed25519) ke GitHub Secrets
+Private key ini akan dipakai GitHub Actions untuk login ke EC2 lewat SSH.
+
+📍 Di GitHub:
+Buka repositori kamu.
+
+Masuk ke Settings > Secrets and variables > Actions.
+
+Klik New repository secret.
+
+Buat secret:
+
+Name: EC2_KEY
+
+Value: isi dengan private key (id_ed25519) kamu.
+
+👉 Untuk ambil isi private key: (powershell)
+```bash
+cat ~/.ssh/id_ed25519
+```
+
