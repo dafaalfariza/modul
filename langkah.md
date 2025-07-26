@@ -218,3 +218,12 @@ Secret Name	Value
 EC2_HOST	Alamat public EC2 kamu, contoh: 3.107.xxx.xxx
 
 EC2_USER	Nama user, biasanya: ec2-user
+
+### Buka folder project kamu di vscode
+
+- git init
+- git remote add origin https://github.com/username/register-app.git
+- git add .
+- git commit -m "Initial push"
+- git branch -M main
+- git push -u origin main
